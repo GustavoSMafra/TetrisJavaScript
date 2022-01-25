@@ -4,18 +4,18 @@ const canvasScore = document.getElementById("canvasScore");
 const canvasContext = canvas.getContext('2d');
 const canvasContextBlock = canvasBlock.getContext('2d');
 const canvasContextScore = canvasScore.getContext('2d');
-canvasContext.scale(20,20)
-canvasContextBlock.scale(20,20)
-canvasContextScore.scale(10,10)
+canvasContext.scale(20,20);
+canvasContextBlock.scale(20,20);
+canvasContextScore.scale(10,10);
 
 window.onload = () => {
-    update()
+    update();
 }
 
 // Update and fall time
 let lastTime = 0;
 let dropCounter = 0;
-let dropInterval = 500 // 0.5 Segundo
+let dropInterval = 500 // 0.5 Seconds
 let gameTime = 0;
 let speedChange = 10000;
 function update(time = 0){
@@ -43,15 +43,15 @@ function update(time = 0){
 function draw(){
     // Draw black screen
     createRect(0, 0, canvas.width, canvas.height, "black");
-    // Draw black screen Block and Block
-    canvasContextBlock.fillStyle = 'black'
-    canvasContextBlock.fillRect(0, 0, canvasBlock.width, canvasBlock.height)
+    // Draw black screen Block and Block;
+    canvasContextBlock.fillStyle = 'black';
+    canvasContextBlock.fillRect(0, 0, canvasBlock.width, canvasBlock.height);
     
-    canvasContextScore.fillStyle = 'black'
-    canvasContextScore.fillRect(0, 0, canvasScore.width, canvasScore.height)
-    canvasContextScore.font = "2px Arial"
-    canvasContextScore.fillStyle = "#00FF42"
-    canvasContextScore.fillText(`Score: ${score}` , 0, 2)
+    canvasContextScore.fillStyle = 'black';
+    canvasContextScore.fillRect(0, 0, canvasScore.width, canvasScore.height);
+    canvasContextScore.font = "2px Arial";
+    canvasContextScore.fillStyle = "#00FF42";
+    canvasContextScore.fillText(`Score: ${score}` , 0, 2);
     
     if(player.storeBlock > 0){
         let block = returnBlock(player.storeBlock-1)
@@ -94,8 +94,8 @@ function drawArena(arena){
 
 // Function to draw things :)
 function createRect(x, y, width, height, color) {
-    canvasContext.fillStyle = color
-    canvasContext.fillRect(x, y, width, height)
+    canvasContext.fillStyle = color;
+    canvasContext.fillRect(x, y, width, height);
 }
 
 // Create the matrix for the arena
@@ -134,13 +134,13 @@ const player = {
     },
     moviment(type){
         if(type == 'a'){
-            this.pos.x--
+            this.pos.x--;
             if(collisionMove(player, arena)){
                 this.pos.x++;
             }
         }
         else if(type == 'd'){
-            this.pos.x++
+            this.pos.x++;
             if(collisionMove(player, arena)){
                 this.pos.x--;
             }
@@ -152,22 +152,22 @@ const player = {
             if(collision(this, arena))
                 this.rotate++;
         }else 
-            this.rotate = 3
+            this.rotate = 3;
             if(collision(this, arena))
                 this.rotate = 0;
     },
     store(){
         if(this.canStore < 2){
             if(this.storeBlock == 0){
-                this.storeBlock = collors.indexOf(player.collor)+1
+                this.storeBlock = collors.indexOf(player.collor)+1;
                 let rand = Math.floor(Math.random() * (7));
                 this.block = returnBlock(rand);
                 this.collor = collors[rand];
                 this.pos.y = 0;
                 this.pos.x = 8;
             } else {
-                let temp = this.storeBlock 
-                this.storeBlock = collors.indexOf(player.collor)+1
+                let temp = this.storeBlock;
+                this.storeBlock = collors.indexOf(player.collor)+1;
                 this.block = returnBlock(temp-1);
                 this.collor = collors[temp-1];
                 this.pos.y = 0;
@@ -255,19 +255,19 @@ function completeLine(arena){
 window.addEventListener("keydown", (event) =>{
     setTimeout(()=>{
         if(event.keyCode == 37){
-            player.moviment("a")
+            player.moviment("a");
         }
         else if(event.keyCode == 39){
-            player.moviment("d")
+            player.moviment("d");
         }
         else if(event.keyCode == 38){
-            player.setRotate()
+            player.setRotate();
         }
         else if(event.keyCode == 40){
-            player.fall()
+            player.fall();
         }
         else if(event.keyCode == 17){
-            player.store()
+            player.store();
         }
     }, 1)
 })
